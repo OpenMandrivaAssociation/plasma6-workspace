@@ -135,8 +135,6 @@ Requires: iso-codes
 # Because of pam file
 Conflicts: kdm < 2:4.11.22-1.1
 Conflicts: kio-extras < 15.08.0
-Requires: kio-extras
-Requires: kio-fuse
 
 %description
 The KDE Plasma workspace.
