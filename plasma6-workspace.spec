@@ -204,7 +204,7 @@ Requires: %{name}
 Provides: %{name}-backend = %{EVRD}
 Requires: xwayland
 Requires: plasma6-kwin-wayland
-Recommends: xdg-desktop-portal-kde
+Recommends: plasma6-xdg-desktop-portal-kde
 
 %description wayland
 Wayland support for Plasma Workspace.
