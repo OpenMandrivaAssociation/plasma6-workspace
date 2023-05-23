@@ -15,6 +15,7 @@ Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-
 Source0: http://download.kde.org//%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 %endif
 Source1: kde.pam
+Patch0: plasma-workspace-bump-sonames.patch
 # FIXME this needs to be redone properly (OM theme)
 # Patch2: plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
 Summary: The KDE Plasma workspace
@@ -139,19 +140,22 @@ Conflicts: kio-extras < 15.08.0
 %description
 The KDE Plasma workspace.
 
-%libpackage kworkspace5 5
+%libpackage kworkspace5 6
+%{_libdir}/libkworkspace5.so.5*
 
-%libpackage plasma-geolocation-interface 5
+%libpackage plasma-geolocation-interface 6
+%{_libdir}/libplasma-geolocation-interface.so.5*
 
-%libpackage weather_ion 7
+%libpackage weather_ion 8
 
-%libpackage taskmanager 6
+%libpackage taskmanager 7
 %{_libdir}/libtaskmanager.so.5*
 
-%libpackage colorcorrect 5
+%libpackage colorcorrect 6
+%{_libdir}/libcolorcorrect.so.5*
 
 %libpackage notificationmanager 5
-%{_libdir}/libnotificationmanager.so.1
+%{_libdir}/libnotificationmanager.so.2
 
 %package -n %{devname}
 Summary: Development files for the KDE Plasma workspace
@@ -244,8 +248,11 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 
 %find_lang %{name} --all-name --with-html
 
-%libpackage kfontinst 5
-%libpackage kfontinstui 5
+%libpackage kfontinst 6
+%{_libdir}/libkfontinst.so.5*
+
+%libpackage kfontinstui 6
+%{_libdir}/libkfontinstui.so.5*
 
 %files -f %{name}.lang
 %{_bindir}/plasma-apply-colorscheme
