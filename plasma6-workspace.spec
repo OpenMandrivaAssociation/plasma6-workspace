@@ -176,12 +176,12 @@ Provides: %{mklibname -d notificationmanager} = %{EVRD}
 %description -n %{devname}
 Development files for the KDE Plasma workspace.
 
-%package -n sddm-theme-breeze
+%package -n plasma6-sddm-theme-breeze
 Summary: KDE Breeze theme for the SDDM display manager
 Group: Graphical desktop/KDE
 Requires: sddm
 
-%description -n sddm-theme-breeze
+%description -n plasma6-sddm-theme-breeze
 KDE Breeze theme for the SDDM display manager.
 
 %package x11
@@ -443,7 +443,7 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_bindir}/startplasma-wayland
 %{_datadir}/wayland-sessions/plasmawayland.desktop
 
-%files -n sddm-theme-breeze
+%files -n plasma6-sddm-theme-breeze
 %{_datadir}/sddm/themes/breeze
 
 %files -n %{devname}
