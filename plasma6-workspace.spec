@@ -179,7 +179,7 @@ Development files for the KDE Plasma workspace.
 %package -n plasma6-sddm-theme-breeze
 Summary: KDE Breeze theme for the SDDM display manager
 Group: Graphical desktop/KDE
-Requires: sddm
+Requires: plasma6-sddm
 
 %description -n plasma6-sddm-theme-breeze
 KDE Breeze theme for the SDDM display manager.
