@@ -1,6 +1,6 @@
-diff -up plasma-workspace-master/CMakeLists.txt.omv~ plasma-workspace-master/CMakeLists.txt
---- plasma-workspace-master/CMakeLists.txt.omv~	2023-05-23 18:01:07.057689163 +0200
-+++ plasma-workspace-master/CMakeLists.txt	2023-05-23 18:01:10.212718499 +0200
+diff -up plasma-workspace-master/CMakeLists.txt.1~ plasma-workspace-master/CMakeLists.txt
+--- plasma-workspace-master/CMakeLists.txt.1~	2023-06-09 23:45:35.837536953 +0200
++++ plasma-workspace-master/CMakeLists.txt	2023-06-09 23:45:53.909711819 +0200
 @@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
  
  project(plasma-workspace)
@@ -8,12 +8,13 @@ diff -up plasma-workspace-master/CMakeLists.txt.omv~ plasma-workspace-master/CMa
 -set(PROJECT_VERSION_MAJOR 5)
 +set(PROJECT_VERSION_MAJOR 6)
  
- set(QT_MIN_VERSION "6.4.0")
+ set(QT_MIN_VERSION "6.5.0")
  set(KF6_MIN_VERSION "5.240.0")
-diff -up plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.omv~ plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt
---- plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.omv~	2023-05-23 18:01:48.883076896 +0200
-+++ plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt	2023-05-23 18:01:51.263098885 +0200
-@@ -13,7 +13,7 @@ target_link_libraries (weather_ion PRIVA
+diff -up plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.1~ plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt
+--- plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.1~	2023-06-09 22:37:23.000000000 +0200
++++ plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt	2023-06-09 23:45:35.837536953 +0200
+@@ -14,8 +14,8 @@ generate_export_header(weather_ion BASE_
+ target_link_libraries (weather_ion PRIVATE KF6::I18n PUBLIC Qt::Core KF6::Plasma KF6::Plasma5Support)
  
  set_target_properties(weather_ion PROPERTIES
 -   VERSION 7.0.0
@@ -23,9 +24,9 @@ diff -up plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.omv~ pl
  )
  
  install (TARGETS weather_ion EXPORT kdeworkspaceLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-diff -up plasma-workspace-master/libnotificationmanager/CMakeLists.txt.omv~ plasma-workspace-master/libnotificationmanager/CMakeLists.txt
---- plasma-workspace-master/libnotificationmanager/CMakeLists.txt.omv~	2023-05-23 18:01:34.106940201 +0200
-+++ plasma-workspace-master/libnotificationmanager/CMakeLists.txt	2023-05-23 18:01:37.183968692 +0200
+diff -up plasma-workspace-master/libnotificationmanager/CMakeLists.txt.1~ plasma-workspace-master/libnotificationmanager/CMakeLists.txt
+--- plasma-workspace-master/libnotificationmanager/CMakeLists.txt.1~	2023-06-09 22:37:23.000000000 +0200
++++ plasma-workspace-master/libnotificationmanager/CMakeLists.txt	2023-06-09 23:45:35.837536953 +0200
 @@ -92,7 +92,7 @@ target_link_libraries(notificationmanage
  
  set_target_properties(notificationmanager PROPERTIES
@@ -35,10 +36,10 @@ diff -up plasma-workspace-master/libnotificationmanager/CMakeLists.txt.omv~ plas
                        EXPORT_NAME LibNotificationManager)
  
  install(TARGETS notificationmanager EXPORT notificationmanagerLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
-diff -up plasma-workspace-master/libtaskmanager/CMakeLists.txt.omv~ plasma-workspace-master/libtaskmanager/CMakeLists.txt
---- plasma-workspace-master/libtaskmanager/CMakeLists.txt.omv~	2023-05-23 18:01:40.878002878 +0200
-+++ plasma-workspace-master/libtaskmanager/CMakeLists.txt	2023-05-23 18:01:43.407026272 +0200
-@@ -67,7 +67,7 @@ endif()
+diff -up plasma-workspace-master/libtaskmanager/CMakeLists.txt.1~ plasma-workspace-master/libtaskmanager/CMakeLists.txt
+--- plasma-workspace-master/libtaskmanager/CMakeLists.txt.1~	2023-06-09 22:37:23.000000000 +0200
++++ plasma-workspace-master/libtaskmanager/CMakeLists.txt	2023-06-09 23:45:35.837536953 +0200
+@@ -63,7 +63,7 @@ endif()
  
  set_target_properties(taskmanager PROPERTIES
                        VERSION ${PROJECT_VERSION}
