@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230609
+%define git 20230707
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -311,7 +311,6 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_datadir}/kio_desktop/*.desktop
 %{_datadir}/kio_desktop/*.trash
 %{_datadir}/knotifications6/*.notifyrc
-%{_datadir}/kservices6/*
 %{_datadir}/kstyle
 %{_datadir}/solid/actions/test-predicate-openinwindow.desktop
 %{_datadir}/plasma/look-and-feel
@@ -353,6 +352,7 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_libdir}/libexec/plasma-sourceenv.sh
 %{_bindir}/kcolorschemeeditor
 %{_bindir}/kfontinst
+%{_datadir}/kio/servicemenus/installfont.desktop
 %{_bindir}/kfontview
 %{_bindir}/lookandfeeltool
 %{_libdir}/libexec/kauth/fontinst*
@@ -438,7 +438,6 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %if %omvver >= 4050000
 %{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %endif
-%{_qtdir}/plugins/wayland-shell-integration/plasma-shell.so
 %{_bindir}/startplasma-wayland
 %{_datadir}/wayland-sessions/plasmawayland.desktop
 
