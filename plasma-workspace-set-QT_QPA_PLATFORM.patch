@@ -1,0 +1,22 @@
+diff -up plasma-workspace-master/startkde/startplasma-wayland.cpp.omv~ plasma-workspace-master/startkde/startplasma-wayland.cpp
+--- plasma-workspace-master/startkde/startplasma-wayland.cpp.omv~	2023-07-08 23:55:31.910595223 +0200
++++ plasma-workspace-master/startkde/startplasma-wayland.cpp	2023-07-08 23:55:59.650293067 +0200
+@@ -22,6 +22,7 @@ int main(int argc, char **argv)
+ 
+     // Let clients try to reconnect to kwin after a restart
+     qputenv("QT_WAYLAND_RECONNECT", "1");
++    qputenv("QT_QPA_PLATFORM", "wayland-egl");
+ 
+     // Query whether org.freedesktop.locale1 is available. If it is, try to
+     // set XKB_DEFAULT_{MODEL,LAYOUT,VARIANT,OPTIONS} accordingly.
+diff -up plasma-workspace-master/startkde/startplasma-x11.cpp.omv~ plasma-workspace-master/startkde/startplasma-x11.cpp
+--- plasma-workspace-master/startkde/startplasma-x11.cpp.omv~	2023-07-08 23:54:54.051132317 +0200
++++ plasma-workspace-master/startkde/startplasma-x11.cpp	2023-07-08 23:55:27.541649557 +0200
+@@ -22,6 +22,7 @@ int main(int argc, char **argv)
+     // because we still need to do some cleanup.
+     signal(SIGHUP, sighupHandler);
+     qputenv("QT_NO_XDG_DESKTOP_PORTAL", QByteArrayLiteral("1"));
++    qputenv("QT_QPA_PLATFORM", "xcb");
+ 
+     QCoreApplication app(argc, argv);
+ 

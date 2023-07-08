@@ -16,6 +16,7 @@ Source0: http://download.kde.org//%{stable}/plasma/%{plasmaver}/%{name}-%{versio
 %endif
 Source1: kde.pam
 Patch0: plasma-workspace-bump-sonames.patch
+Patch1: plasma-workspace-set-QT_QPA_PLATFORM.patch
 # FIXME this needs to be redone properly (OM theme)
 # Patch2: plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
 Summary: The KDE Plasma workspace
