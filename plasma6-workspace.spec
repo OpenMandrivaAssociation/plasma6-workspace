@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230707
+%define git 20230715
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -263,7 +263,6 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_bindir}/plasma-apply-wallpaperimage
 %{_bindir}/plasma-shutdown
 %{_sysconfdir}/xdg/autostart/gmenudbusmenuproxy.desktop
-%{_sysconfdir}/xdg/autostart/klipper.desktop
 %{_sysconfdir}/xdg/autostart/org.kde.plasmashell.desktop
 %{_sysconfdir}/xdg/autostart/xembedsniproxy.desktop
 %{_sysconfdir}/xdg/taskmanagerrulesrc
@@ -303,7 +302,6 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_qtdir}/qml/org/kde/holidayeventshelperplugin
 %{_qtdir}/qml/org/kde/plasma/private/appmenu
 %{_datadir}/metainfo/*.xml
-%{_datadir}/applications/org.kde.klipper.desktop
 %{_datadir}/applications/org.kde.plasmashell.desktop
 %{_datadir}/applications/org.kde.systemmonitor.desktop
 %{_datadir}/config.kcfg/*.kcfg
