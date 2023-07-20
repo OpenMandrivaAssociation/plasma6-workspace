@@ -134,6 +134,8 @@ Requires: distro-release-theme
 Requires: qt6-qttools-dbus
 Requires: plasma6-kactivitymanagerd
 Requires: kf6-qqc2-desktop-style
+Requires: qt6-qtimageformats
+Recommends: kf6-kimageformats
 Provides: virtual-notification-daemon
 %ifarch %{armx}
 Requires: %{name}-wayland = %{EVRD}
