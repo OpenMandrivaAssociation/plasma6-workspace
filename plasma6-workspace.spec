@@ -132,6 +132,7 @@ BuildRequires: plasma6-xdg-desktop-portal-kde
 # needed for backgrounds and patch 2
 Requires: distro-release-theme
 Requires: qt6-qttools-dbus
+Requires: plasma6-kactivitymanagerd
 Provides: virtual-notification-daemon
 %ifarch %{armx}
 Requires: %{name}-wayland = %{EVRD}
