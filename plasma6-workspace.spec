@@ -8,7 +8,7 @@
 
 Name: plasma6-workspace
 Version: 5.240.0
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-workspace-master.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -131,6 +131,7 @@ BuildRequires: cmake(KSysGuard) >= 5.27.80
 BuildRequires: plasma6-xdg-desktop-portal-kde
 # needed for backgrounds and patch 2
 Requires: distro-release-theme
+Requires: qt6-qttools-dbus
 Provides: virtual-notification-daemon
 %ifarch %{armx}
 Requires: %{name}-wayland = %{EVRD}
