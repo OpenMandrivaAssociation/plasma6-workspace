@@ -121,6 +121,8 @@ BuildRequires: pam-devel
 BuildRequires: pkgconfig(iso-codes)
 BuildRequires: cmake(Qt6QuickTest)
 BuildRequires: cmake(PolkitQt6-1)
+BuildRequires: cmake(AppStreamQt)
+BuildRequires: pkgconfig(libudev)
 # Both Plasma 5 and Plasma 6 provide
 # cmake(KPipeWire), cmake(KSysGuard) and friends
 BuildRequires: cmake(KPipeWire) >= 5.27.80
