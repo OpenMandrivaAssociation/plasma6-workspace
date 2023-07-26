@@ -207,6 +207,8 @@ Requires: xset
 Requires: xrdb
 Requires: iso-codes
 Requires: plasma6-kwin-x11
+Requires: kf6-kidletime-x11
+Requires: plasma6-libkscreen-x11
 
 %description x11
 X11 support for Plasma Workspace.
@@ -218,6 +220,8 @@ Requires: %{name}
 Provides: %{name}-backend = %{EVRD}
 Requires: xwayland
 Requires: plasma6-kwin-wayland
+Requires: kf6-kidletime-wayland
+Requires: plasma6-libkscreen-wayland
 Recommends: plasma6-xdg-desktop-portal-kde
 
 %description wayland
