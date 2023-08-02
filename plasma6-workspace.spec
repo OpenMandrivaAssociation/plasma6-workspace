@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230726
+%define git 20230802
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -408,6 +408,8 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_lookandfeel.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_nightcolor.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_notifications.so
+%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_regionandlang.so
+%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_soundtheme.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_style.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_users.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings_qwidgets/kcm_fontinst.so
@@ -415,6 +417,7 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_datadir}/applications/kcm_autostart.desktop
 %{_datadir}/applications/kcm_colors.desktop
 %{_datadir}/applications/kcm_cursortheme.desktop
+%{_datadir}/applications/kcm_desktoptheme.desktop
 %{_datadir}/applications/kcm_feedback.desktop
 %{_datadir}/applications/kcm_fontinst.desktop
 %{_datadir}/applications/kcm_fonts.desktop
@@ -422,12 +425,12 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_datadir}/applications/kcm_lookandfeel.desktop
 %{_datadir}/applications/kcm_nightcolor.desktop
 %{_datadir}/applications/kcm_notifications.desktop
+%{_datadir}/applications/kcm_soundtheme.desktop 
 %{_datadir}/applications/kcm_style.desktop
 %{_datadir}/applications/kcm_users.desktop
 %{_datadir}/applications/org.kde.plasmawindowed.desktop
 %{_datadir}/plasma/avatars
 %{_bindir}/plasma-localegen-helper
-%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_regionandlang.so
 %{_datadir}/applications/kcm_regionandlang.desktop
 %{_datadir}/dbus-1/system-services/org.kde.localegenhelper.service
 %{_datadir}/dbus-1/system.d/org.kde.localegenhelper.conf
@@ -436,13 +439,13 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_qtdir}/plugins/kf6/thumbcreator/fontthumbnail.so
 %{_qtdir}/qml/org/kde/plasma/private/mediacontroller
 %{_datadir}/zsh/site-functions/_plasmashell
-%{_datadir}/applications/kcm_desktoptheme.desktop
 %{_qtdir}/plugins/plasma5support/dataengine
 %{_qtdir}/plugins/kf6/kfileitemaction/wallpaperfileitemaction.so
 %{_qtdir}/plugins/kf6/packagestructure/plasma_*.so
 %{_qtdir}/plugins/kf6/packagestructure/wallpaper_images.so
 %{_qtdir}/plugins/plasma5support/geolocationprovider
 %{_datadir}/plasma5support/services/*.operations
+%{_libdir}/kconf_update_bin/plasma6.0-remove-old-shortcuts
 
 %files x11
 %{_bindir}/startplasma-x11
