@@ -42,6 +42,7 @@ BuildRequires: cmake(KF6XmlGui)
 BuildRequires: cmake(KF6FileMetaData)
 BuildRequires: cmake(KF6Wayland)
 BuildRequires: cmake(KF6NetworkManagerQt)
+BuildRequires: cmake(KF6TextWidgets)
 BuildRequires: pkgconfig(libnm) >= 1.4.0
 BuildRequires: cmake(KF6Wallet)
 BuildRequires: cmake(KF6GlobalAccel)
