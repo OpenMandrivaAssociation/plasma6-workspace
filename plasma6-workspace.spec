@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230802
+%define git 20230804
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -264,6 +264,12 @@ sed -i -e "s#^type=.*#type=image#" %{buildroot}%{_datadir}/sddm/themes/breeze/th
 # (tpg) fix autostart permissions
 chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 
+# FIXME as of Plasma 6 20230804 snapshot, mesa 23.2, VBox 7.0.10,
+# Having the sddm wayland configuration installed crashes VBox and
+# leaves the VM unusable.
+# Use rootless X11 for the time being, even if we use plasma wayland.
+rm %{buildroot}%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
+
 %find_lang %{name} --all-name --with-html
 
 %libpackage kfontinst 6
@@ -454,9 +460,7 @@ chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 %{_datadir}/xsessions/plasma.desktop
 
 %files wayland
-%if %omvver >= 4050000
-%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
-%endif
+#%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %{_bindir}/startplasma-wayland
 %{_datadir}/wayland-sessions/plasmawayland.desktop
 
