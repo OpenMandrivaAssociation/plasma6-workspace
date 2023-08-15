@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230812
+%define git 20230815
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -17,8 +17,9 @@ Source0: http://download.kde.org//%{stable}/plasma/%{plasmaver}/%{name}-%{versio
 Source1: kde.pam
 Patch0: plasma-workspace-bump-sonames.patch
 Patch1: plasma-workspace-set-QT_QPA_PLATFORM.patch
+Patch2: sddm-breeze-add-missing-import.patch
 # FIXME this needs to be redone properly (OM theme)
-# Patch2: plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
+# Patch3: plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
 Summary: The KDE Plasma workspace
 URL: http://kde.org/
 License: GPL
