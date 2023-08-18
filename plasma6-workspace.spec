@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230815
+%define git 20230818
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -399,7 +399,6 @@ rm %{buildroot}%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %{_datadir}/knsrcfiles/*.knsrc
 %{_datadir}/konqsidebartng/virtual_folders/services/fonts.desktop
 %{_datadir}/krunner/dbusplugins/plasma-runner-baloosearch.desktop
-%{_datadir}/kxmlgui6/kfontview/*.rc
 %{_datadir}/kglobalaccel/org.kde.krunner.desktop
 %{_datadir}/plasma/plasmoids/org.kde.plasma.manage-inputmethod
 %{_qtdir}/plugins/kf6/parts/kfontviewpart.so
@@ -439,6 +438,7 @@ rm %{buildroot}%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %{_datadir}/applications/kcm_users.desktop
 %{_datadir}/applications/org.kde.plasmawindowed.desktop
 %{_datadir}/plasma/avatars
+%{_datadir}/kxmlgui5/kfontview
 %{_bindir}/plasma-localegen-helper
 %{_datadir}/applications/kcm_regionandlang.desktop
 %{_datadir}/dbus-1/system-services/org.kde.localegenhelper.service
