@@ -77,6 +77,7 @@ BuildRequires: cmake(KF6KExiv2)
 BuildRequires: cmake(KF6Svg)
 BuildRequires: cmake(KF6StatusNotifierItem)
 BuildRequires: %mklibname -d KF6IconWidgets
+BuildRequires: cmake(KF6KirigamiAddons)
 BuildRequires: cmake(KUserFeedbackQt6)
 BuildRequires: cmake(PlasmaWaylandProtocols)
 BuildRequires: cmake(Qt6WaylandClient)
