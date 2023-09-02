@@ -1,14 +1,14 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230825
+%define git 20230902
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
 
 Name: plasma6-workspace
 Version: 5.240.0
-Release: %{?git:0.%{git}.}2
+Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-workspace-master.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -338,8 +338,8 @@ rm %{buildroot}%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %{_datadir}/kio_desktop/*.trash
 %{_datadir}/knotifications6/*.notifyrc
 %{_datadir}/kstyle
-%{_datadir}/solid/actions/test-predicate-openinwindow.desktop
 %{_datadir}/plasma/look-and-feel
+%{_datadir}/solid/actions/openWithFileManager.desktop
 %dir %{_datadir}/plasma/plasmoids
 %{_datadir}/plasma/plasmoids/org.kde.plasma.activitybar
 %{_datadir}/plasma/plasmoids/org.kde.plasma.analogclock
