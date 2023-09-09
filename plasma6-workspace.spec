@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230902
+%define git 20230909
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -276,12 +276,6 @@ rm %{buildroot}%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 
 %find_lang %{name} --all-name --with-html
 
-%libpackage kfontinst 6
-%{_libdir}/libkfontinst.so.5*
-
-%libpackage kfontinstui 6
-%{_libdir}/libkfontinstui.so.5*
-
 %files -f %{name}.lang
 %{_bindir}/plasma-apply-colorscheme
 %{_bindir}/plasma-apply-cursortheme
@@ -307,6 +301,8 @@ rm %{buildroot}%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %{_bindir}/systemmonitor
 %{_bindir}/xembedsniproxy
 %{_bindir}/kde-systemd-start-condition
+%{_libdir}/libkfontinst.so.*
+%{_libdir}/libkfontinstui.so.*
 %{_libdir}/libexec/baloorunner
 %{_libdir}/libexec/ksmserver-logout-greeter
 %dir %{_qtdir}/plugins/plasma
@@ -381,7 +377,7 @@ rm %{buildroot}%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %{_datadir}/kio/servicemenus/installfont.desktop
 %{_bindir}/kfontview
 %{_bindir}/lookandfeeltool
-%{_libdir}/libexec/kauth/fontinst*
+%{_libdir}/libexec/kf6/kauth/fontinst*
 %{_datadir}/polkit-1/actions/org.kde.fontinst.policy
 %{_libdir}/libexec/kfontprint
 %{_libdir}/libexec/plasma-changeicons
