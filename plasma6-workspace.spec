@@ -18,6 +18,7 @@ Source1: kde.pam
 Patch0: plasma-workspace-bump-sonames.patch
 Patch1: plasma-workspace-set-QT_QPA_PLATFORM.patch
 Patch2: sddm-breeze-add-missing-import.patch
+Patch3: plasma-workspace-default-OM-wallpaper.patch
 # FIXME this needs to be redone properly (OM theme)
 # Patch3: plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
 Summary: The KDE Plasma workspace
