@@ -1,6 +1,6 @@
 diff -up plasma-workspace-master/CMakeLists.txt.1~ plasma-workspace-master/CMakeLists.txt
---- plasma-workspace-master/CMakeLists.txt.1~	2023-09-24 16:44:18.000000000 +0200
-+++ plasma-workspace-master/CMakeLists.txt	2023-09-24 17:26:44.164677541 +0200
+--- plasma-workspace-master/CMakeLists.txt.1~	2023-09-27 13:37:24.000000000 +0200
++++ plasma-workspace-master/CMakeLists.txt	2023-09-27 15:41:58.524525277 +0200
 @@ -6,6 +6,7 @@ string(REPLACE "." ";" VERSION_LIST ${PR
  list(GET VERSION_LIST 0 PROJECT_VERSION_MAJOR)
  list(GET VERSION_LIST 1 PROJECT_VERSION_MINOR)
@@ -10,8 +10,8 @@ diff -up plasma-workspace-master/CMakeLists.txt.1~ plasma-workspace-master/CMake
  set(QT_MIN_VERSION "6.5.0")
  set(KF6_MIN_VERSION "5.240.0")
 diff -up plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.1~ plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt
---- plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.1~	2023-09-24 16:44:18.000000000 +0200
-+++ plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt	2023-09-24 17:26:44.164778511 +0200
+--- plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.1~	2023-09-27 13:37:24.000000000 +0200
++++ plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt	2023-09-27 15:41:58.524619765 +0200
 @@ -14,8 +14,8 @@ generate_export_header(weather_ion BASE_
  target_link_libraries (weather_ion PRIVATE KF6::I18n PUBLIC Qt::Core KF6::Plasma KF6::Plasma5Support)
  
@@ -24,8 +24,8 @@ diff -up plasma-workspace-master/dataengines/weather/ions/CMakeLists.txt.1~ plas
  
  install (TARGETS weather_ion EXPORT kdeworkspaceLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 diff -up plasma-workspace-master/libnotificationmanager/CMakeLists.txt.1~ plasma-workspace-master/libnotificationmanager/CMakeLists.txt
---- plasma-workspace-master/libnotificationmanager/CMakeLists.txt.1~	2023-09-24 17:26:44.164857500 +0200
-+++ plasma-workspace-master/libnotificationmanager/CMakeLists.txt	2023-09-24 17:29:01.976596269 +0200
+--- plasma-workspace-master/libnotificationmanager/CMakeLists.txt.1~	2023-09-27 15:41:58.524696019 +0200
++++ plasma-workspace-master/libnotificationmanager/CMakeLists.txt	2023-09-27 16:33:58.930938282 +0200
 @@ -92,7 +92,7 @@ target_link_libraries(notificationmanage
  
  set_target_properties(notificationmanager PROPERTIES
@@ -34,10 +34,10 @@ diff -up plasma-workspace-master/libnotificationmanager/CMakeLists.txt.1~ plasma
 +                      SOVERSION 2
                        EXPORT_NAME LibNotificationManager)
  
- ecm_add_qml_module(notificationmanager URI org.kde.notificationmanager)
+ ecm_add_qml_module(notificationmanager URI org.kde.notificationmanager GENERATE_PLUGIN_SOURCE)
 diff -up plasma-workspace-master/libtaskmanager/CMakeLists.txt.1~ plasma-workspace-master/libtaskmanager/CMakeLists.txt
---- plasma-workspace-master/libtaskmanager/CMakeLists.txt.1~	2023-09-24 16:44:18.000000000 +0200
-+++ plasma-workspace-master/libtaskmanager/CMakeLists.txt	2023-09-24 17:26:44.164970644 +0200
+--- plasma-workspace-master/libtaskmanager/CMakeLists.txt.1~	2023-09-27 13:37:24.000000000 +0200
++++ plasma-workspace-master/libtaskmanager/CMakeLists.txt	2023-09-27 15:41:58.524814773 +0200
 @@ -71,7 +71,7 @@ endif()
  
  set_target_properties(taskmanager PROPERTIES

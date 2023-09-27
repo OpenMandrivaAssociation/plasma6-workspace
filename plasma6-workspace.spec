@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230924
+%define git 20230927
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -347,6 +347,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/plasma/plasmoids/org.kde.plasma.analogclock
 %{_datadir}/plasma/plasmoids/org.kde.plasma.battery
 %{_datadir}/plasma/plasmoids/org.kde.plasma.calendar
+%{_datadir}/plasma/plasmoids/org.kde.plasma.cameraindicator
 %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard
 %{_datadir}/plasma/plasmoids/org.kde.plasma.devicenotifier
 %{_datadir}/plasma/plasmoids/org.kde.plasma.digitalclock
