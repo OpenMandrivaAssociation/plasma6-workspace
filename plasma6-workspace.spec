@@ -1,7 +1,7 @@
 %define devname %mklibname plasma-workspace -d
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230927
+%define git 20231014
 
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
@@ -312,6 +312,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/libkfontinstui.so.*
 %{_libdir}/libexec/baloorunner
 %{_libdir}/libexec/ksmserver-logout-greeter
+%{_libdir}/kconf_update_bin/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels
 %dir %{_qtdir}/plugins/plasma
 %dir %{_qtdir}/plugins/plasma/applets
 %dir %{_qtdir}/plugins/kf6/krunner
