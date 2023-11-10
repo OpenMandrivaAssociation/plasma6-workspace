@@ -74,7 +74,7 @@ BuildRequires: cmake(KF6Kirigami2)
 BuildRequires: cmake(KF6QuickCharts)
 BuildRequires: cmake(KF6UnitConversion)
 BuildRequires: cmake(KF6Plasma5Support)
-BuildRequires: cmake(KF6KExiv2)
+BuildRequires: cmake(KExiv2Qt6)
 BuildRequires: cmake(KF6Svg)
 BuildRequires: cmake(KF6StatusNotifierItem)
 BuildRequires: %mklibname -d KF6IconWidgets
@@ -159,36 +159,18 @@ Requires: iso-codes
 # Because of pam file
 Conflicts: kdm < 2:4.11.22-1.1
 Conflicts: kio-extras < 15.08.0
+Obsoletes: %{mklibname plasma-geolocation-interface} = 5.240.0
+Obsoletes: %{mklibname colorcorrect} = 5.240.0
+Obsoletes: %{mklibname weather_ion} = 5.240.0
+Obsoletes: %{mklibname taskmanager} = 5.240.0
+Obsoletes: %{mklibname notificationmanager} = 5.240.0
 
 %description
 The KDE Plasma workspace.
 
-%libpackage kworkspace6
-%{_libdir}/libkworkspace6.so.5*
-
-%libpackage plasma-geolocation-interface 6
-%{_libdir}/libplasma-geolocation-interface.so.5*
-
-%libpackage weather_ion 8
-
-%libpackage taskmanager 7
-%{_libdir}/libtaskmanager.so.5*
-
-%libpackage colorcorrect 6
-%{_libdir}/libcolorcorrect.so.5*
-
-%libpackage notificationmanager 5
-%{_libdir}/libnotificationmanager.so.2
-
 %package -n %{devname}
 Summary: Development files for the KDE Plasma workspace
 Group: Development/KDE and Qt
-Requires: %{mklibname kworkspace5} = %{EVRD}
-Requires: %{mklibname plasma-geolocation-interface} = %{EVRD}
-Requires: %{mklibname taskmanager} = %{EVRD}
-Requires: %{mklibname weather_ion} = %{EVRD}
-Requires: %{mklibname colorcorrect} = %{EVRD}
-Requires: %{mklibname notificationmanager} = %{EVRD}
 Provides: %{mklibname -d kworkspace} = %{EVRD}
 Provides: %{mklibname -d plasma-geolocation-interface} = %{EVRD}
 Provides: %{mklibname -d taskmanager} = %{EVRD}
@@ -289,6 +271,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_sysconfdir}/xdg/autostart/org.kde.plasmashell.desktop
 %{_sysconfdir}/xdg/autostart/xembedsniproxy.desktop
 %{_sysconfdir}/xdg/taskmanagerrulesrc
+%{_sysconfdir}/xdg/menus/plasma-applications.menu
 %{_sysconfdir}/pam.d/kde
 %{_bindir}/gmenudbusmenuproxy
 %{_bindir}/kcminit
@@ -308,6 +291,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/libexec/baloorunner
 %{_libdir}/libexec/ksmserver-logout-greeter
 %{_libdir}/kconf_update_bin/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels
+%{_libdir}/kconf_update_bin/plasmashell-6.0-migrate-panel-hiding-setting
 %dir %{_qtdir}/plugins/plasma
 %dir %{_qtdir}/plugins/plasma/applets
 %dir %{_qtdir}/plugins/kf6/krunner
@@ -318,6 +302,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/plugins/phonon_platform
 %{_qtdir}/plugins/plasma/applets/*.so
 %{_qtdir}/plugins/plasmacalendarplugins
+%{_qtdir}/qml/org/kde/breeze
 %{_qtdir}/qml/org/kde/colorcorrect
 %dir %{_qtdir}/qml/org/kde/plasma/private
 %{_qtdir}/qml/org/kde/plasma/private/digitalclock
@@ -460,15 +445,23 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/kconf_update_bin/plasma6.0-remove-old-shortcuts
 %{_libdir}/libkmpris.so*
 %{_libdir}/qt6/qml/org/kde/plasma/private/mpris
+# Please do NOT split those into separate libpackages. They're used only
+# internally.
+%{_libdir}/libkworkspace6.so*
+%{_libdir}/libplasma-geolocation-interface.so*
+%{_libdir}/libweather_ion.so*
+%{_libdir}/libtaskmanager.so*
+%{_libdir}/libcolorcorrect.so.*
+%{_libdir}/libnotificationmanager.so*
 
 %files x11
 %{_bindir}/startplasma-x11
-%{_datadir}/xsessions/plasma.desktop
+%{_datadir}/xsessions/plasmax11.desktop
 
 %files wayland
 #%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %{_bindir}/startplasma-wayland
-%{_datadir}/wayland-sessions/plasmawayland.desktop
+%{_datadir}/wayland-sessions/plasma.desktop
 
 %files -n plasma6-sddm-theme-breeze
 %{_datadir}/sddm/themes/breeze
