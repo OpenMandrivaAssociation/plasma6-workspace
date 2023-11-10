@@ -163,8 +163,8 @@ Conflicts: kio-extras < 15.08.0
 %description
 The KDE Plasma workspace.
 
-%libpackage kworkspace5 6
-%{_libdir}/libkworkspace5.so.5*
+%libpackage kworkspace6
+%{_libdir}/libkworkspace6.so.5*
 
 %libpackage plasma-geolocation-interface 6
 %{_libdir}/libplasma-geolocation-interface.so.5*
