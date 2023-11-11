@@ -8,7 +8,7 @@
 
 Name: plasma6-workspace
 Version: 5.27.80
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-workspace-master.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -171,12 +171,7 @@ The KDE Plasma workspace.
 %package -n %{devname}
 Summary: Development files for the KDE Plasma workspace
 Group: Development/KDE and Qt
-Provides: %{mklibname -d kworkspace} = %{EVRD}
-Provides: %{mklibname -d plasma-geolocation-interface} = %{EVRD}
-Provides: %{mklibname -d taskmanager} = %{EVRD}
-Provides: %{mklibname -d weather_ion} = %{EVRD}
-Provides: %{mklibname -d colorcorrect} = %{EVRD}
-Provides: %{mklibname -d notificationmanager} = %{EVRD}
+Requires: %{name} = %{EVRD}
 
 %description -n %{devname}
 Development files for the KDE Plasma workspace.
