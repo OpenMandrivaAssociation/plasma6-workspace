@@ -7,8 +7,8 @@
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
 
 Name: plasma6-workspace
-Version: 5.27.80
-Release: %{?git:0.%{git}.}3
+Version: 5.90.0
+Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-workspace-master.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -32,8 +32,8 @@ BuildRequires: cmake(KF6CoreAddons)
 BuildRequires: cmake(KF6Crash)
 BuildRequires: cmake(KF6Solid)
 BuildRequires: cmake(KF6Parts)
-BuildRequires: cmake(KF6Activities)
-BuildRequires: cmake(KF6ActivitiesStats)
+BuildRequires: cmake(PlasmaActivities)
+BuildRequires: cmake(PlasmaActivitiesStats)
 BuildRequires: cmake(KF6Auth)
 BuildRequires: cmake(KF6Notifications)
 BuildRequires: cmake(KF6ItemModels)
@@ -42,7 +42,7 @@ BuildRequires: cmake(KF6DBusAddons)
 BuildRequires: cmake(KF6Declarative)
 BuildRequires: cmake(KF6XmlGui)
 BuildRequires: cmake(KF6FileMetaData)
-BuildRequires: cmake(KF6Wayland)
+BuildRequires: cmake(Wayland) >= 5.90.0
 BuildRequires: cmake(KF6NetworkManagerQt)
 BuildRequires: cmake(KF6TextWidgets)
 BuildRequires: pkgconfig(libnm) >= 1.4.0
@@ -54,8 +54,8 @@ BuildRequires: cmake(Gettext)
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(KF6KIO)
 BuildRequires: cmake(KF6Declarative)
-BuildRequires: cmake(KF6Plasma)
-BuildRequires: cmake(KF6PlasmaQuick)
+BuildRequires: cmake(Plasma) >= 5.90.0
+BuildRequires: cmake(PlasmaQuick) >= 5.90.0
 BuildRequires: cmake(KF6Config)
 BuildRequires: cmake(KF6Prison)
 BuildRequires: cmake(Phonon4Qt6)
@@ -278,7 +278,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_bindir}/plasma_waitforname
 %{_bindir}/plasmawindowed
 %{_bindir}/plasma_session
-%{_bindir}/systemmonitor
 %{_bindir}/xembedsniproxy
 %{_bindir}/kde-systemd-start-condition
 %{_libdir}/libkfontinst.so.*
@@ -300,6 +299,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/qml/org/kde/breeze
 %{_qtdir}/qml/org/kde/colorcorrect
 %dir %{_qtdir}/qml/org/kde/plasma/private
+%{_qtdir}/qml/org/kde/plasma/private/brightnesscontrolplugin
 %{_qtdir}/qml/org/kde/plasma/private/digitalclock
 %{_qtdir}/qml/org/kde/plasma/private/shell
 %{_qtdir}/qml/org/kde/plasma/private/sessions
@@ -309,7 +309,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/qml/org/kde/plasma/private/appmenu
 %{_datadir}/metainfo/*.xml
 %{_datadir}/applications/org.kde.plasmashell.desktop
-%{_datadir}/applications/org.kde.systemmonitor.desktop
 %{_datadir}/config.kcfg/*.kcfg
 %{_datadir}/dbus-1/services/*.service
 %{_datadir}/desktop-directories
@@ -440,6 +439,10 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/kconf_update_bin/plasma6.0-remove-old-shortcuts
 %{_libdir}/libkmpris.so*
 %{_libdir}/qt6/qml/org/kde/plasma/private/mpris
+%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_wallpaper.so
+%{_datadir}/applications/kcm_wallpaper.desktop
+%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness
+
 # Please do NOT split those into separate libpackages. They're used only
 # internally.
 %{_libdir}/libkworkspace6.so*
