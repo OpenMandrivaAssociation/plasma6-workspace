@@ -43,6 +43,7 @@ BuildRequires: cmake(KF6Declarative)
 BuildRequires: cmake(KF6XmlGui)
 BuildRequires: cmake(KF6FileMetaData)
 BuildRequires: cmake(Wayland) >= 5.90.0
+BuildRequires: cmake(KWayland) >= 5.90.0
 BuildRequires: cmake(KF6NetworkManagerQt)
 BuildRequires: cmake(KF6TextWidgets)
 BuildRequires: pkgconfig(libnm) >= 1.4.0
