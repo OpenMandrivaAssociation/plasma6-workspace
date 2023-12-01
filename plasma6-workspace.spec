@@ -140,8 +140,6 @@ BuildRequires: plasma6-kwin-devel
 BuildRequires: cmake(KWinDBusInterface) >= 5.27.80
 BuildRequires: cmake(KSysGuard) >= 5.27.80
 BuildRequires: xdotool
-# Prevent pulling KF5
-BuildRequires: plasma6-xdg-desktop-portal-kde
 # needed for backgrounds and patch 2
 Requires: distro-release-theme
 Requires: qt6-qttools-dbus
