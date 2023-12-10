@@ -1,4 +1,7 @@
-%define devname %mklibname plasma-workspace -d
+# Not using mklibname here to avoid clashing with the package
+# by the same name from plasma-workspace 5.x
+# Change once we're removing P5.
+%define devname %{name}-devel
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "$(echo %{version} |cut -d. -f2)" -ge 80 -o "$(echo %{version} |cut -d. -f3)" -ge 80 ] && echo -n un; echo -n stable)
 #define git 20231104
@@ -8,7 +11,7 @@
 
 Name: plasma6-workspace
 Version: 5.90.0
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-workspace-master.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
