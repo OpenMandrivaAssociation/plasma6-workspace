@@ -10,8 +10,8 @@
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
 
 Name: plasma6-workspace
-Version: 5.90.0
-Release: %{?git:0.%{git}.}2
+Version: 5.91.0
+Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-workspace-master.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -135,6 +135,7 @@ BuildRequires: cmake(Qt6QuickTest)
 BuildRequires: cmake(PolkitQt6-1)
 BuildRequires: cmake(AppStreamQt)
 BuildRequires: pkgconfig(libudev)
+BuildRequires: gettext
 # for DBus interfaces
 BuildRequires: plasma6-kwin
 # Both Plasma 5 and Plasma 6 provide
@@ -286,8 +287,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/libkfontinstui.so.*
 %{_libdir}/libexec/baloorunner
 %{_libdir}/libexec/ksmserver-logout-greeter
-%{_libdir}/kconf_update_bin/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels
-%{_libdir}/kconf_update_bin/plasmashell-6.0-migrate-panel-hiding-setting
 %dir %{_qtdir}/plugins/plasma
 %dir %{_qtdir}/plugins/plasma/applets
 %dir %{_qtdir}/plugins/kf6/krunner
@@ -355,7 +354,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/qml/org/kde/notificationmanager
 %{_qtdir}/qml/org/kde/plasma/private/containmentlayoutmanager
 %{_qtdir}/qml/org/kde/plasma/private/kicker
-%{_libdir}/kconf_update_bin/krunnerglobalshortcuts
 %{_libdir}/libexec/plasma-sourceenv.sh
 %{_bindir}/kcolorschemeeditor
 %{_bindir}/kfontinst
@@ -369,7 +367,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/libexec/plasma-dbus-run-session-if-needed
 %{_userunitdir}/*.service
 %{_userunitdir}/*.target
-%{_libdir}/kconf_update_bin/krunnerhistory
 %{_datadir}/applications/org.kde.kcolorschemeeditor.desktop
 %{_datadir}/applications/org.kde.kfontview.desktop
 %{_datadir}/dbus-1/system-services/org.kde.fontinst.service
@@ -377,8 +374,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/icons/hicolor/*/mimetypes/fonts-package.*
 %{_datadir}/icons/hicolor/*/apps/kfontview.*
 %{_datadir}/icons/hicolor/scalable/apps/preferences-desktop-font-installer.svgz
-%{_datadir}/kconf_update/*.pl
-%{_datadir}/kconf_update/*.upd
 %{_datadir}/kfontinst/icons/hicolor/*/actions/*.png
 %{_datadir}/knsrcfiles/*.knsrc
 %{_datadir}/konqsidebartng/virtual_folders/services/fonts.desktop
@@ -428,7 +423,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/dbus-1/system-services/org.kde.localegenhelper.service
 %{_datadir}/dbus-1/system.d/org.kde.localegenhelper.conf
 %{_datadir}/polkit-1/actions/org.kde.localegenhelper.policy
-%{_libdir}/kconf_update_bin/plasmashell-5.27-use-panel-thickness-in-default-group
 %{_qtdir}/plugins/kf6/thumbcreator/fontthumbnail.so
 %{_qtdir}/qml/org/kde/plasma/private/mediacontroller
 %{_datadir}/zsh/site-functions/_plasmashell
@@ -438,12 +432,18 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/plugins/kf6/packagestructure/wallpaper_images.so
 %{_qtdir}/plugins/plasma5support/geolocationprovider
 %{_datadir}/plasma5support/services/*.operations
-%{_libdir}/kconf_update_bin/plasma6.0-remove-old-shortcuts
 %{_libdir}/libkmpris.so*
 %{_libdir}/qt6/qml/org/kde/plasma/private/mpris
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_wallpaper.so
 %{_datadir}/applications/kcm_wallpaper.desktop
 %{_datadir}/plasma/plasmoids/org.kde.plasma.brightness
+%{_libdir}/kconf_update_bin/plasma6.0-remove-dpi-settings
+%{_libdir}/kconf_update_bin/plasma6.0-remove-old-shortcuts
+%{_libdir}/kconf_update_bin/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels
+%{_datadir}/kconf_update/plasma6.0-remove-dpi-settings.upd
+%{_datadir}/kconf_update/plasma6.0-remove-old-shortcuts.upd
+%{_datadir}/kconf_update/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels.upd
+%{_datadir}/zsh/site-functions/_krunner
 
 # Please do NOT split those into separate libpackages. They're used only
 # internally.
