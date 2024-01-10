@@ -10,7 +10,7 @@
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
 
 Name: plasma6-workspace
-Version: 5.91.0
+Version: 5.92.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-workspace-master.tar.bz2#/plasma-workspace-%{git}.tar.bz2
@@ -77,7 +77,7 @@ BuildRequires: cmake(KF6Holidays)
 BuildRequires: cmake(KF6Kirigami2)
 BuildRequires: cmake(KF6QuickCharts)
 BuildRequires: cmake(KF6UnitConversion)
-BuildRequires: cmake(KF6Plasma5Support)
+BuildRequires: cmake(Plasma5Support)
 BuildRequires: cmake(KExiv2Qt6)
 BuildRequires: cmake(KF6Svg)
 BuildRequires: cmake(KF6StatusNotifierItem)
