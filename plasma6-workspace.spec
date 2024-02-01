@@ -10,7 +10,7 @@
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
 
 Name: plasma6-workspace
-Version: 5.92.0
+Version: 5.93.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/master/plasma-workspace-master.tar.bz2#/plasma-workspace-%{git}.tar.bz2
@@ -444,6 +444,8 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/kconf_update/plasma6.0-remove-old-shortcuts.upd
 %{_datadir}/kconf_update/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels.upd
 %{_datadir}/zsh/site-functions/_krunner
+%{_datadir}/kconf_update/migrate-calendar-to-plugin-id.py
+%{_datadir}/kconf_update/migrate-calendar-to-plugin-id.upd
 
 # Please do NOT split those into separate libpackages. They're used only
 # internally.
