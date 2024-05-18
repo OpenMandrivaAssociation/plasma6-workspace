@@ -11,9 +11,11 @@
 # filter qml/plugins provides
 %global __provides_exclude_from ^(%{_kde5_qmldir}/.*\\.so|%{_qt5_plugindir}/.*\\.so)$
 
+%define libname %mklibname kworkspace6
+
 Name: plasma6-workspace
 Version: 6.0.4
-Release: %{?git:0.%{git}.}5
+Release: %{?git:0.%{git}.}6
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -175,10 +177,20 @@ Obsoletes: %{mklibname notificationmanager} = 5.240.0
 %description
 The KDE Plasma workspace.
 
+# Split out because it's used by both plasma-workspace
+# and sddm-theme-breeze
+%package -n %{libname}
+Summary: The Plasma 6 workspace library
+Group: System/Libraries
+
+%description -n %{libname}
+The Plasma 6 workspace library
+
 %package -n %{devname}
 Summary: Development files for the KDE Plasma workspace
 Group: Development/KDE and Qt
 Requires: %{name} = %{EVRD}
+Requires: %{libname} = %{EVRD}
 
 %description -n %{devname}
 Development files for the KDE Plasma workspace.
@@ -237,6 +249,7 @@ components used by Plasma Workspace and the SDDM Breeze theme
 %package -n qml-org.kde.plasma.private.sessions
 Summary: The org.kde.plasma.private.sessions QML component
 Group: Graphical desktop/KDE
+Requires: %{libname} = %{EVRD}
 
 %description -n qml-org.kde.plasma.private.sessions
 The org.kde.plasma.private.sessions QML component contains QML
@@ -473,12 +486,14 @@ rm -rf %{buildroot}%{_builddir}
 
 # Please do NOT split those into separate libpackages. They're used only
 # internally.
-%{_libdir}/libkworkspace6.so*
 %{_libdir}/libplasma-geolocation-interface.so*
 %{_libdir}/libweather_ion.so*
 %{_libdir}/libtaskmanager.so*
 %{_libdir}/libcolorcorrect.so.*
 %{_libdir}/libnotificationmanager.so*
+
+%files -n %{libname}
+%{_libdir}/libkworkspace6.so*
 
 %files -n qml-org.kde.breeze.components
 %{_qtdir}/qml/org/kde/breeze/components
