@@ -15,7 +15,7 @@
 
 Name: plasma6-workspace
 Version: 6.0.4
-Release: %{?git:0.%{git}.}6
+Release: %{?git:0.%{git}.}7
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -157,6 +157,7 @@ Requires: kf6-qqc2-desktop-style
 Requires: qt6-qtimageformats
 Requires: qml-org.kde.breeze.components = %{EVRD}
 Requires: qml-org.kde.plasma.private.sessions = %{EVRD}
+Requires: qml-org.kde.plasma.workspace = %{EVRD}
 Recommends: kf6-kimageformats
 Provides: virtual-notification-daemon
 %ifarch %{armx}
@@ -201,6 +202,7 @@ Group: Graphical desktop/KDE
 Requires: plasma6-sddm
 Requires: qml-org.kde.breeze.components = %{EVRD}
 Requires: qml-org.kde.plasma.private.sessions = %{EVRD}
+Requires: qml-org.kde.plasma.workspace = %{EVRD}
 Requires: qml(org.kde.plasma.plasma5support)
 
 %description -n plasma6-sddm-theme-breeze
@@ -253,6 +255,15 @@ Requires: %{libname} = %{EVRD}
 
 %description -n qml-org.kde.plasma.private.sessions
 The org.kde.plasma.private.sessions QML component contains QML
+components used by Plasma Workspace and the SDDM Breeze theme
+
+%package -n qml-org.kde.plasma.workspace
+Summary: The org.kde.plasma.workspace QML component
+Group: Graphical desktop/KDE
+Requires: %{libname} = %{EVRD}
+
+%description -n qml-org.kde.plasma.workspace
+The org.kde.plasma.workspace QML component contains QML
 components used by Plasma Workspace and the SDDM Breeze theme
 
 %prep
@@ -335,12 +346,14 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/plugins/plasma/applets/*.so
 %{_qtdir}/plugins/plasmacalendarplugins
 %{_qtdir}/qml/org/kde/colorcorrect
+%{_qtdir}/qml/org/kde/plasma/workspace/calendar
+%{_qtdir}/qml/org/kde/plasma/workspace/dialogs
+%{_qtdir}/qml/org/kde/plasma/workspace/trianglemousefilter
 %dir %{_qtdir}/qml/org/kde/plasma/private
 %{_qtdir}/qml/org/kde/plasma/private/brightnesscontrolplugin
 %{_qtdir}/qml/org/kde/plasma/private/digitalclock
 %{_qtdir}/qml/org/kde/plasma/private/shell
 %{_qtdir}/qml/org/kde/plasma/wallpapers
-%{_qtdir}/qml/org/kde/plasma/workspace
 %{_qtdir}/qml/org/kde/holidayeventshelperplugin
 %{_qtdir}/qml/org/kde/plasma/private/appmenu
 %{_datadir}/metainfo/*.xml
@@ -494,6 +507,11 @@ rm -rf %{buildroot}%{_builddir}
 
 %files -n %{libname}
 %{_libdir}/libkworkspace6.so*
+
+%files -n qml-org.kde.plasma.workspace
+%dir %{_qtdir}/qml/org/kde/plasma/workspace
+%{_qtdir}/qml/org/kde/plasma/workspace/components
+%{_qtdir}/qml/org/kde/plasma/workspace/keyboardlayout
 
 %files -n qml-org.kde.breeze.components
 %{_qtdir}/qml/org/kde/breeze/components
