@@ -13,7 +13,7 @@
 
 Name: plasma6-workspace
 Version: 6.0.4
-Release: %{?git:0.%{git}.}2
+Release: %{?git:0.%{git}.}3
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -153,6 +153,7 @@ Requires: qt6-qttools-dbus
 Requires: plasma6-kactivitymanagerd
 Requires: kf6-qqc2-desktop-style
 Requires: qt6-qtimageformats
+Requires: qml-org.kde.breeze.components = %{EVRD}
 Recommends: kf6-kimageformats
 Provides: virtual-notification-daemon
 %ifarch %{armx}
@@ -185,6 +186,7 @@ Development files for the KDE Plasma workspace.
 Summary: KDE Breeze theme for the SDDM display manager
 Group: Graphical desktop/KDE
 Requires: plasma6-sddm
+Requires: qml-org.kde.breeze.components = %{EVRD}
 
 %description -n plasma6-sddm-theme-breeze
 KDE Breeze theme for the SDDM display manager.
@@ -219,6 +221,15 @@ Recommends: plasma6-xdg-desktop-portal-kde
 
 %description wayland
 Wayland support for Plasma Workspace.
+
+%package -n qml-org.kde.breeze.components
+Summary: The org.kde.breeze.components QML component
+Group: Graphical desktop/KDE
+Requires: plasma6-qqc2-breeze-style
+
+%description -n qml-org.kde.breeze.components
+The org.kde.breeze.components QML component contains QML
+components used by Plasma Workspace and the SDDM Breeze theme
 
 %prep
 %autosetup -p1 -n plasma-workspace-%{?git:%{gitbranchd}}%{!?git:%{version}}
@@ -299,7 +310,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/plugins/phonon_platform
 %{_qtdir}/plugins/plasma/applets/*.so
 %{_qtdir}/plugins/plasmacalendarplugins
-%{_qtdir}/qml/org/kde/breeze
 %{_qtdir}/qml/org/kde/colorcorrect
 %dir %{_qtdir}/qml/org/kde/plasma/private
 %{_qtdir}/qml/org/kde/plasma/private/brightnesscontrolplugin
@@ -459,6 +469,9 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/libtaskmanager.so*
 %{_libdir}/libcolorcorrect.so.*
 %{_libdir}/libnotificationmanager.so*
+
+%files -n qml-org.kde.breeze.components
+%{_qtdir}/qml/org/kde/breeze/components
 
 %files x11
 %{_bindir}/startplasma-x11
