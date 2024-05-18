@@ -13,7 +13,7 @@
 
 Name: plasma6-workspace
 Version: 6.0.4
-Release: %{?git:0.%{git}.}4
+Release: %{?git:0.%{git}.}5
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -154,6 +154,7 @@ Requires: plasma6-kactivitymanagerd
 Requires: kf6-qqc2-desktop-style
 Requires: qt6-qtimageformats
 Requires: qml-org.kde.breeze.components = %{EVRD}
+Requires: qml-org.kde.plasma.private.sessions = %{EVRD}
 Recommends: kf6-kimageformats
 Provides: virtual-notification-daemon
 %ifarch %{armx}
@@ -187,6 +188,7 @@ Summary: KDE Breeze theme for the SDDM display manager
 Group: Graphical desktop/KDE
 Requires: plasma6-sddm
 Requires: qml-org.kde.breeze.components = %{EVRD}
+Requires: qml-org.kde.plasma.private.sessions = %{EVRD}
 Requires: qml(org.kde.plasma.plasma5support)
 
 %description -n plasma6-sddm-theme-breeze
@@ -230,6 +232,14 @@ Requires: plasma6-qqc2-breeze-style
 
 %description -n qml-org.kde.breeze.components
 The org.kde.breeze.components QML component contains QML
+components used by Plasma Workspace and the SDDM Breeze theme
+
+%package -n qml-org.kde.plasma.private.sessions
+Summary: The org.kde.plasma.private.sessions QML component
+Group: Graphical desktop/KDE
+
+%description -n qml-org.kde.plasma.private.sessions
+The org.kde.plasma.private.sessions QML component contains QML
 components used by Plasma Workspace and the SDDM Breeze theme
 
 %prep
@@ -316,7 +326,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/qml/org/kde/plasma/private/brightnesscontrolplugin
 %{_qtdir}/qml/org/kde/plasma/private/digitalclock
 %{_qtdir}/qml/org/kde/plasma/private/shell
-%{_qtdir}/qml/org/kde/plasma/private/sessions
 %{_qtdir}/qml/org/kde/plasma/wallpapers
 %{_qtdir}/qml/org/kde/plasma/workspace
 %{_qtdir}/qml/org/kde/holidayeventshelperplugin
@@ -473,6 +482,9 @@ rm -rf %{buildroot}%{_builddir}
 
 %files -n qml-org.kde.breeze.components
 %{_qtdir}/qml/org/kde/breeze/components
+
+%files -n qml-org.kde.plasma.private.sessions
+%{_qtdir}/qml/org/kde/plasma/private/sessions
 
 %files x11
 %{_bindir}/startplasma-x11
