@@ -15,7 +15,7 @@
 
 Name: plasma6-workspace
 Version: 6.0.5.1
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -137,7 +137,7 @@ BuildRequires: pam-devel
 BuildRequires: pkgconfig(iso-codes)
 BuildRequires: cmake(Qt6QuickTest)
 BuildRequires: cmake(PolkitQt6-1)
-BuildRequires: cmake(AppStreamQt)
+BuildRequires: cmake(AppStreamQt) >= 1.0.3
 BuildRequires: pkgconfig(libudev)
 BuildRequires: gettext
 # for DBus interfaces
