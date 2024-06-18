@@ -14,8 +14,8 @@
 %define libname %mklibname kworkspace6
 
 Name: plasma6-workspace
-Version: 6.0.5.1
-Release: %{?git:0.%{git}.}2
+Version: 6.1.0
+Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -24,7 +24,6 @@ Source0: http://download.kde.org//%{stable}/plasma/%{plasmaver}/plasma-workspace
 Source1: kde.pam
 Patch0: plasma-workspace-bump-sonames.patch
 Patch1: plasma-workspace-set-QT_QPA_PLATFORM.patch
-Patch2: sddm-breeze-add-missing-import.patch
 Patch3: plasma-workspace-default-OM-wallpaper.patch
 # FIXME this needs to be redone properly (OM theme)
 # Patch3: plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
@@ -196,18 +195,6 @@ Requires: %{libname} = %{EVRD}
 %description -n %{devname}
 Development files for the KDE Plasma workspace.
 
-%package -n plasma6-sddm-theme-breeze
-Summary: KDE Breeze theme for the SDDM display manager
-Group: Graphical desktop/KDE
-Requires: plasma6-sddm
-Requires: qml-org.kde.breeze.components = %{EVRD}
-Requires: qml-org.kde.plasma.private.sessions = %{EVRD}
-Requires: qml-org.kde.plasma.workspace = %{EVRD}
-Requires: qml(org.kde.plasma.plasma5support)
-
-%description -n plasma6-sddm-theme-breeze
-KDE Breeze theme for the SDDM display manager.
-
 %package x11
 Summary: X11 support for Plasma Workspace
 Group: Graphical desktop/KDE
@@ -288,10 +275,6 @@ sed -i -e 's/dbus-run-session //g' login-sessions/plasmawayland*.desktop.cmake
 
 install -Dpm 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/kde
 
-# sddm breeze theme background
-sed -i -e "s#^background=.*#background=%{_datadir}/mdk/backgrounds/OpenMandriva-splash.png#" %{buildroot}%{_datadir}/sddm/themes/breeze/theme.conf
-sed -i -e "s#^type=.*#type=image#" %{buildroot}%{_datadir}/sddm/themes/breeze/theme.conf
-
 # (tpg) fix autostart permissions
 chmod 644 %{buildroot}%{_sysconfdir}/xdg/autostart/*
 
@@ -315,6 +298,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_bindir}/plasma-shutdown
 %{_sysconfdir}/xdg/autostart/gmenudbusmenuproxy.desktop
 %{_sysconfdir}/xdg/autostart/org.kde.plasmashell.desktop
+%{_sysconfdir}/xdg/autostart/org.kde.plasma-fallback-session-restore.desktop
 %{_sysconfdir}/xdg/autostart/xembedsniproxy.desktop
 %{_sysconfdir}/xdg/taskmanagerrulesrc
 %{_sysconfdir}/xdg/menus/plasma-applications.menu
@@ -354,8 +338,14 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/qml/org/kde/plasma/private/digitalclock
 %{_qtdir}/qml/org/kde/plasma/private/shell
 %{_qtdir}/qml/org/kde/plasma/wallpapers
-%{_qtdir}/qml/org/kde/holidayeventshelperplugin
 %{_qtdir}/qml/org/kde/plasma/private/appmenu
+%{_qtdir}/qml/org/kde/plasma/private/battery
+%{_qtdir}/qml/org/kde/plasma/private/batterymonitor
+%{_qtdir}/qml/org/kde/plasma/private/devicenotifier
+%{_qtdir}/qml/org/kde/plasma/private/holidayevents
+%{_qtdir}/qml/org/kde/plasma/private/keyboardindicator
+%{_qtdir}/qml/org/kde/plasma/private/systemtray
+%{_qtdir}/qml/org/kde/plasma/workspace/dbus
 %{_datadir}/metainfo/*.xml
 %{_datadir}/applications/org.kde.plasmashell.desktop
 %{_datadir}/config.kcfg/*.kcfg
@@ -441,7 +431,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_fonts.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_icons.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_lookandfeel.so
-%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_nightcolor.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_notifications.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_regionandlang.so
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_soundtheme.so
@@ -458,7 +447,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/applications/kcm_fonts.desktop
 %{_datadir}/applications/kcm_icons.desktop
 %{_datadir}/applications/kcm_lookandfeel.desktop
-%{_datadir}/applications/kcm_nightcolor.desktop
 %{_datadir}/applications/kcm_notifications.desktop
 %{_datadir}/applications/kcm_soundtheme.desktop 
 %{_datadir}/applications/kcm_style.desktop
@@ -496,6 +484,13 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/zsh/site-functions/_krunner
 %{_datadir}/kconf_update/migrate-calendar-to-plugin-id.py
 %{_datadir}/kconf_update/migrate-calendar-to-plugin-id.upd
+%{_libdir}/libexec/plasma-fallback-session-restore
+%{_libdir}/libexec/plasma-fallback-session-save
+%{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_nightlight.so
+%{_datadir}/applications/kcm_nightlight.desktop
+%{_datadir}/applications/org.kde.kfontinst.desktop
+%{_datadir}/applications/org.kde.plasma-fallback-session-save.desktop
+%{_datadir}/plasma/weather/noaa_station_list.xml
 
 # Please do NOT split those into separate libpackages. They're used only
 # internally.
@@ -504,6 +499,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/libtaskmanager.so*
 %{_libdir}/libcolorcorrect.so.*
 %{_libdir}/libnotificationmanager.so*
+%{_libdir}/libbatterycontrol.so*
 
 %files -n %{libname}
 %{_libdir}/libkworkspace6.so*
@@ -527,9 +523,6 @@ rm -rf %{buildroot}%{_builddir}
 #%{_sysconfdir}/sddm.conf.d/plasma-wayland.conf
 %{_bindir}/startplasma-wayland
 %{_datadir}/wayland-sessions/plasma.desktop
-
-%files -n plasma6-sddm-theme-breeze
-%{_datadir}/sddm/themes/breeze
 
 %files -n %{devname}
 %{_includedir}/*
