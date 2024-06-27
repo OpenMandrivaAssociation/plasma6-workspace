@@ -15,7 +15,7 @@
 
 Name: plasma6-workspace
 Version: 6.1.1
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -344,7 +344,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/qml/org/kde/plasma/private/batterymonitor
 %{_qtdir}/qml/org/kde/plasma/private/devicenotifier
 %{_qtdir}/qml/org/kde/plasma/private/holidayevents
-%{_qtdir}/qml/org/kde/plasma/private/keyboardindicator
 %{_qtdir}/qml/org/kde/plasma/private/systemtray
 %{_qtdir}/qml/org/kde/plasma/workspace/dbus
 %{_datadir}/metainfo/*.xml
@@ -509,6 +508,7 @@ rm -rf %{buildroot}%{_builddir}
 %dir %{_qtdir}/qml/org/kde/plasma/workspace
 %{_qtdir}/qml/org/kde/plasma/workspace/components
 %{_qtdir}/qml/org/kde/plasma/workspace/keyboardlayout
+%{_qtdir}/qml/org/kde/plasma/private/keyboardindicator
 
 %files -n qml-org.kde.breeze.components
 %{_qtdir}/qml/org/kde/breeze/components
