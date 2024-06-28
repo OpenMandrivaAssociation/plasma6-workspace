@@ -15,7 +15,7 @@
 
 Name: plasma6-workspace
 Version: 6.1.1
-Release: %{?git:0.%{git}.}3
+Release: %{?git:0.%{git}.}4
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -498,10 +498,10 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/libtaskmanager.so*
 %{_libdir}/libcolorcorrect.so.*
 %{_libdir}/libnotificationmanager.so*
-%{_libdir}/libbatterycontrol.so*
 
 %files -n %{libname}
 %{_libdir}/libkworkspace6.so*
+%{_libdir}/libbatterycontrol.so*
 
 %files -n qml-org.kde.plasma.workspace
 %dir %{_qtdir}/qml/org/kde/plasma/workspace
