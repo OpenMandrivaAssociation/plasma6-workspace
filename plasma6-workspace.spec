@@ -15,7 +15,7 @@
 
 Name: plasma6-workspace
 Version: 6.1.3
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -158,6 +158,9 @@ Requires: qt6-qtimageformats
 Requires: qml-org.kde.breeze.components = %{EVRD}
 Requires: qml-org.kde.plasma.private.sessions = %{EVRD}
 Requires: qml-org.kde.plasma.workspace = %{EVRD}
+# D-Bus service required by kcm_users.so -- make sure you
+# move this dependency if you split out kcm_users at some point
+Requires: accountsservice
 Recommends: kf6-kimageformats
 Provides: virtual-notification-daemon
 %ifarch %{armx}
