@@ -14,7 +14,7 @@
 %define libname %mklibname kworkspace6
 
 Name: plasma6-workspace
-Version: 6.1.5
+Version: 6.2.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
@@ -158,6 +158,7 @@ Requires: qt6-qtimageformats
 Requires: qml-org.kde.breeze.components = %{EVRD}
 Requires: qml-org.kde.plasma.private.sessions = %{EVRD}
 Requires: qml-org.kde.plasma.workspace = %{EVRD}
+Requires: qml-org.kde.plasma.private.clipboard = %{EVRD}
 # D-Bus service required by kcm_users.so -- make sure you
 # move this dependency if you split out kcm_users at some point
 Requires: accountsservice
@@ -239,6 +240,15 @@ Requires: plasma6-qqc2-breeze-style
 The org.kde.breeze.components QML component contains QML
 components used by Plasma Workspace and the SDDM Breeze theme
 
+%package -n qml-org.kde.plasma.private.clipboard
+Summary: The org.kde.plasma.private.clipboard QML component
+Group: Graphical desktop/KDE
+Requires: %{libname} = %{EVRD}
+
+%description -n qml-org.kde.plasma.private.clipboard
+The org.kde.plasma.private.clipboard QML component contains QML
+components used by Plasma Workspace and the SDDM Breeze theme
+
 %package -n qml-org.kde.plasma.private.sessions
 Summary: The org.kde.plasma.private.sessions QML component
 Group: Graphical desktop/KDE
@@ -293,6 +303,8 @@ rm -rf %{buildroot}%{_builddir}
 
 %find_lang %{name} --all-name --with-html
 
+%libpackage klipper 6
+
 %files -f %{name}.lang
 %{_bindir}/plasma-apply-colorscheme
 %{_bindir}/plasma-apply-cursortheme
@@ -338,12 +350,10 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/qml/org/kde/plasma/workspace/dialogs
 %{_qtdir}/qml/org/kde/plasma/workspace/trianglemousefilter
 %dir %{_qtdir}/qml/org/kde/plasma/private
-%{_qtdir}/qml/org/kde/plasma/private/brightnesscontrolplugin
 %{_qtdir}/qml/org/kde/plasma/private/digitalclock
 %{_qtdir}/qml/org/kde/plasma/private/shell
 %{_qtdir}/qml/org/kde/plasma/wallpapers
 %{_qtdir}/qml/org/kde/plasma/private/appmenu
-%{_qtdir}/qml/org/kde/plasma/private/batterymonitor
 %{_qtdir}/qml/org/kde/plasma/private/devicenotifier
 %{_qtdir}/qml/org/kde/plasma/private/holidayevents
 %{_qtdir}/qml/org/kde/plasma/private/systemtray
@@ -359,10 +369,10 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/kstyle
 %{_datadir}/plasma/look-and-feel
 %{_datadir}/solid/actions/openWithFileManager.desktop
+%{_datadir}/xdg-desktop-portal/kde-portals.conf
 %dir %{_datadir}/plasma/plasmoids
 %{_datadir}/plasma/plasmoids/org.kde.plasma.activitybar
 %{_datadir}/plasma/plasmoids/org.kde.plasma.analogclock
-%{_datadir}/plasma/plasmoids/org.kde.plasma.battery
 %{_datadir}/plasma/plasmoids/org.kde.plasma.calendar
 %{_datadir}/plasma/plasmoids/org.kde.plasma.cameraindicator
 %{_datadir}/plasma/plasmoids/org.kde.plasma.clipboard
@@ -474,7 +484,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/qt6/qml/org/kde/plasma/private/mpris
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_wallpaper.so
 %{_datadir}/applications/kcm_wallpaper.desktop
-%{_datadir}/plasma/plasmoids/org.kde.plasma.brightness
 %{_libdir}/kconf_update_bin/plasma6.0-remove-dpi-settings
 %{_libdir}/kconf_update_bin/plasma6.0-remove-old-shortcuts
 %{_libdir}/kconf_update_bin/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels
@@ -515,6 +524,9 @@ rm -rf %{buildroot}%{_builddir}
 
 %files -n qml-org.kde.breeze.components
 %{_qtdir}/qml/org/kde/breeze/components
+
+%files -n qml-org.kde.plasma.private.clipboard
+%{_qtdir}/qml/org/kde/plasma/private/clipboard
 
 %files -n qml-org.kde.plasma.private.sessions
 %{_qtdir}/qml/org/kde/plasma/private/sessions
