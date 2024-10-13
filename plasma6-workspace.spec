@@ -95,6 +95,7 @@ BuildRequires: cmake(LayerShellQt)
 BuildRequires: cmake(WaylandProtocols)
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(dbusmenu-qt6)
+BuildRequires: pkgconfig(dbus-1)
 BuildRequires: pkgconfig(libqalculate)
 BuildRequires: pkgconfig(libgps) >= 3.15
 BuildRequires: pkgconfig(libpipewire-0.3)
