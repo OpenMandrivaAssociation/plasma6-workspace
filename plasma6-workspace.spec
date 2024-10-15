@@ -14,7 +14,7 @@
 %define libname %mklibname kworkspace6
 
 Name: plasma6-workspace
-Version: 6.2.0
+Version: 6.2.1
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
@@ -370,6 +370,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/knotifications6/*.notifyrc
 %{_datadir}/kstyle
 %{_datadir}/plasma/look-and-feel
+%{_datadir}/applications/org.kde.klipper.desktop
 %{_datadir}/solid/actions/openWithFileManager.desktop
 %{_datadir}/xdg-desktop-portal/kde-portals.conf
 %dir %{_datadir}/plasma/plasmoids
