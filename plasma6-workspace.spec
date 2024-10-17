@@ -28,7 +28,7 @@ Patch3: plasma-workspace-default-OM-wallpaper.patch
 # FIXME this needs to be redone properly (OM theme)
 # Patch3: plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
 Summary: The KDE Plasma workspace
-URL: http://kde.org/
+URL: https://kde.org/
 License: GPL
 Obsoletes: simplesystray < %{EVRD}
 Group: Graphical desktop/KDE
