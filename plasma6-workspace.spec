@@ -163,6 +163,8 @@ Requires: qml-org.kde.breeze.components = %{EVRD}
 Requires: qml-org.kde.plasma.private.sessions = %{EVRD}
 Requires: qml-org.kde.plasma.workspace = %{EVRD}
 Requires: qml-org.kde.plasma.private.clipboard = %{EVRD}
+# for nightlight
+Requires: qml(QtPositioning)
 # D-Bus service required by kcm_users.so -- make sure you
 # move this dependency if you split out kcm_users at some point
 Requires: accountsservice
