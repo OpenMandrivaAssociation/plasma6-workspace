@@ -14,7 +14,7 @@
 %define libname %mklibname kworkspace6
 
 Name: plasma6-workspace
-Version: 6.2.5
+Version: 6.3.0
 Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
@@ -485,7 +485,6 @@ rm -rf %{buildroot}%{_builddir}
 %{_qtdir}/plugins/kf6/kfileitemaction/wallpaperfileitemaction.so
 %{_qtdir}/plugins/kf6/packagestructure/plasma_*.so
 %{_qtdir}/plugins/kf6/packagestructure/wallpaper_images.so
-%{_qtdir}/plugins/plasma5support/geolocationprovider
 %{_datadir}/plasma5support/services/*.operations
 %{_libdir}/libkmpris.so*
 %{_libdir}/qt6/qml/org/kde/plasma/private/mpris
@@ -495,6 +494,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_libdir}/kconf_update_bin/plasma6.0-remove-old-shortcuts
 %{_libdir}/kconf_update_bin/plasmashell-6.0-keep-default-floating-setting-for-plasma-5-panels
 %{_libdir}/kconf_update_bin/plasmashell-6.0-keep-custom-position-of-panels
+%{_libdir}/kconf_update_bin/plasma6.3-update-clipboard-database-2-to-3
 %{_datadir}/kconf_update/plasmashell-6.0-keep-custom-position-of-panels.upd
 %{_datadir}/kconf_update/plasma6.0-remove-dpi-settings.upd
 %{_datadir}/kconf_update/plasma6.0-remove-old-shortcuts.upd
@@ -502,6 +502,7 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/zsh/site-functions/_krunner
 %{_datadir}/kconf_update/migrate-calendar-to-plugin-id.py
 %{_datadir}/kconf_update/migrate-calendar-to-plugin-id.upd
+%{_datadir}/kconf_update/plasma6.3-update-clipboard-database-2-to-3.upd
 %{_libdir}/libexec/plasma-fallback-session-restore
 %{_libdir}/libexec/plasma-fallback-session-save
 %{_qtdir}/plugins/plasma/kcms/systemsettings/kcm_nightlight.so
@@ -509,10 +510,8 @@ rm -rf %{buildroot}%{_builddir}
 %{_datadir}/applications/org.kde.kfontinst.desktop
 %{_datadir}/applications/org.kde.plasma-fallback-session-save.desktop
 %{_datadir}/plasma/weather/noaa_station_list.xml
-
 # Please do NOT split those into separate libpackages. They're used only
 # internally.
-%{_libdir}/libplasma-geolocation-interface.so*
 %{_libdir}/libweather_ion.so*
 %{_libdir}/libtaskmanager.so*
 %{_libdir}/libcolorcorrect.so.*
