@@ -140,6 +140,8 @@ BuildRequires: pkgconfig(iso-codes)
 BuildRequires: cmake(Qt6QuickTest)
 BuildRequires: cmake(PolkitQt6-1)
 BuildRequires: cmake(AppStreamQt) >= 1.0.3
+BuildRequires: cmake(packagekitqt6)
+BuildRequires: pkgconfig(xcb-cursor)
 BuildRequires: pkgconfig(libudev)
 BuildRequires: gettext
 # for DBus interfaces
