@@ -15,7 +15,7 @@
 
 Name: plasma6-workspace
 Version: 6.3.1
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -143,6 +143,7 @@ BuildRequires: cmake(AppStreamQt) >= 1.0.3
 BuildRequires: cmake(packagekitqt6)
 BuildRequires: pkgconfig(xcb-cursor)
 BuildRequires: pkgconfig(libudev)
+BuildRequires: spirv-tools
 BuildRequires: gettext
 # for DBus interfaces
 BuildRequires: plasma6-kwin
