@@ -15,7 +15,7 @@
 
 Name: plasma6-workspace
 Version: 6.3.3
-Release: %{?git:0.%{git}.}1
+Release: %{?git:0.%{git}.}2
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -24,6 +24,7 @@ Source0: http://download.kde.org//%{stable}/plasma/%{plasmaver}/plasma-workspace
 Source1: kde.pam
 Patch0: plasma-workspace-bump-sonames.patch
 Patch1: plasma-workspace-set-QT_QPA_PLATFORM.patch
+Patch2: plasma-workspace-wayland-egl-is-wayland.patch
 Patch3: plasma-workspace-default-OM-wallpaper.patch
 # FIXME this needs to be redone properly (OM theme)
 # Patch3: plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
