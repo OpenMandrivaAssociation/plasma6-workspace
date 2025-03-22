@@ -1,0 +1,142 @@
+From bbecc43cef4e7c615fe8b1691c2eb1e1f916edf3 Mon Sep 17 00:00:00 2001
+From: Fushan Wen <qydwhotmail@gmail.com>
+Date: Fri, 14 Mar 2025 00:35:06 +0800
+Subject: [PATCH] klipper: only accept certain MIME types
+
+After Klipper accepts almost all MIME types from the clipboard, some
+applications might not work well. Already known examples are Inkscape
+and LibreOffice. While saving all types is ideal, not all types are
+useful in the clipboard history, so instead of accepting all types,
+Klipper will only save data of useful types to the history.
+---
+ appiumtests/applets/clipboardtest.py |  4 ++--
+ klipper/autotests/v3migrationtest.py |  2 +-
+ klipper/updateclipboardjob.cpp       | 22 +++++++++++++++++-----
+ klipper/updateclipboardjob.h         |  2 --
+ 4 files changed, 20 insertions(+), 10 deletions(-)
+
+diff --git a/appiumtests/applets/clipboardtest.py b/appiumtests/applets/clipboardtest.py
+index dc2f73ec539..f3212ce961e 100755
+--- a/appiumtests/applets/clipboardtest.py
++++ b/appiumtests/applets/clipboardtest.py
+@@ -430,7 +430,7 @@ class ClipboardTest(unittest.TestCase):
+         temp_file = tempfile.NamedTemporaryFile(suffix=".txt")
+         urls_data = GLib.Bytes.new(bytes(f"file://{temp_file.name}\r\n", "utf-8"))
+         content_urls = Gdk.ContentProvider.new_for_bytes("text/uri-list", urls_data)
+-        content_application = Gdk.ContentProvider.new_for_bytes("application/x-kde-appiumtest", GLib.Bytes.new(bytes("abcdefg", "utf-8")))
++        content_application = Gdk.ContentProvider.new_for_bytes("application/json", GLib.Bytes.new(bytes("abcdefg", "utf-8")))
+         content_union = Gdk.ContentProvider.new_union([ascii_text, utf8_text, content_image, content_urls, content_application])
+         app.gtk_copy(content_union)
+         app.driver.find_element(AppiumBy.NAME, f"file://{temp_file.name}")
+@@ -451,7 +451,7 @@ class ClipboardTest(unittest.TestCase):
+             mime_data = app.gtk_get_clipboard_mime_data()
+             self.assertEqual(mime_data["text/plain;charset=utf-8"].get_data(), utf8_text_data.get_data())
+             self.assertEqual(mime_data["text/uri-list"].get_data(), urls_data.get_data())
+-            self.assertIn("application/x-kde-appiumtest", mime_data)
++            self.assertIn("application/json", mime_data)
+             self.assertNotIn("text/plain;charset=ANSI_X3.4-1968", mime_data)
+             with tempfile.NamedTemporaryFile(mode="wb", suffix=".png") as temp_file:
+                 temp_file.write(mime_data["image/png"].get_data())
+diff --git a/klipper/autotests/v3migrationtest.py b/klipper/autotests/v3migrationtest.py
+index 06f06767b32..1df43a4f774 100755
+--- a/klipper/autotests/v3migrationtest.py
++++ b/klipper/autotests/v3migrationtest.py
+@@ -99,7 +99,7 @@ class V3MigrationTest(unittest.TestCase):
+             # main
+             self.assertEqual(res[0][0], "8f9353dabfdcf9aca5a901cd2c4ae6717cac5adc")
+             self.assertGreaterEqual(res[0][1], self.time_now)
+-            self.assertEqual(res[0][2], "application/x-qt-image")
++            self.assertEqual(res[0][2], "image/png")
+             self.assertIsNone(res[0][3])
+ 
+             # aux
+diff --git a/klipper/updateclipboardjob.cpp b/klipper/updateclipboardjob.cpp
+index 30b35d82718..2864d60e19b 100644
+--- a/klipper/updateclipboardjob.cpp
++++ b/klipper/updateclipboardjob.cpp
+@@ -21,6 +21,15 @@
+ 
+ using namespace Qt::StringLiterals;
+ 
++namespace
++{
++constexpr std::array<QStringView, 3> s_acceptableTextFormatPrefixes{
++    u"text/",
++    u"application/json",
++    u"application/xml",
++};
++}
++
+ UpdateDatabaseJob *UpdateDatabaseJob::updateClipboard(QObject *parent,
+                                                       QSqlDatabase *database,
+                                                       QStringView databaseFolder,
+@@ -56,7 +65,9 @@ UpdateDatabaseJob *UpdateDatabaseJob::updateClipboard(QObject *parent,
+                     // Qt clipboard doesn't support other encodings.
+                     continue;
+                 }
+-            } else if (format.startsWith(u"application/x-openoffice-link")) {
++            } else if (std::none_of(s_acceptableTextFormatPrefixes.begin(), s_acceptableTextFormatPrefixes.end(), [&format](QStringView prefix) {
++                           return format.startsWith(prefix);
++                       })) {
+                 // Don't create un-asked for DDE links in LibreOffice apps;
+                 // we don't want them.
+                 continue;
+@@ -73,7 +84,7 @@ UpdateDatabaseJob *UpdateDatabaseJob::updateClipboard(QObject *parent,
+         }
+     }
+ 
+-    return new UpdateDatabaseJob(parent, database, databaseFolder, uuid, text, formats, std::move(mimeDataList), timestamp);
++    return new UpdateDatabaseJob(parent, database, databaseFolder, uuid, text, std::move(mimeDataList), timestamp);
+ }
+ 
+ UpdateDatabaseJob::UpdateDatabaseJob(QObject *parent,
+@@ -81,14 +92,12 @@ UpdateDatabaseJob::UpdateDatabaseJob(QObject *parent,
+                                      QStringView databaseFolder,
+                                      const QString &uuid,
+                                      const QString &text,
+-                                     const QStringList &formats,
+                                      std::list<MimeData> &&mimeDataList,
+                                      qreal timestamp)
+     : KCompositeJob(parent)
+     , m_db(database)
+     , m_uuid(uuid)
+     , m_text(text)
+-    , m_formats(formats)
+     , m_dataDir(databaseFolder + u"/data/")
+     , m_mimeDataList(std::move(mimeDataList))
+     , m_timestamp(timestamp)
+@@ -118,7 +127,10 @@ void UpdateDatabaseJob::start()
+         query.addBindValue(qreal(m_timestamp));
+         query.addBindValue(qreal(m_timestamp));
+     }
+-    query.addBindValue(m_formats.join(u','));
++    query.addBindValue(
++        std::accumulate(std::next(m_mimeDataList.begin()), m_mimeDataList.end(), m_mimeDataList.begin()->type, [](const QString &a, const MimeData &b) {
++            return a + u',' + b.type;
++        }));
+     query.addBindValue(m_text);
+     if (!query.exec()) {
+         setErrorText(query.lastError().text());
+diff --git a/klipper/updateclipboardjob.h b/klipper/updateclipboardjob.h
+index 5aae19adaa8..873987cfddf 100644
+--- a/klipper/updateclipboardjob.h
++++ b/klipper/updateclipboardjob.h
+@@ -49,7 +49,6 @@ protected:
+                                QStringView databaseFolder,
+                                const QString &uuid,
+                                const QString &text,
+-                               const QStringList &formats,
+                                std::list<MimeData> &&mimeDataList,
+                                qreal timestamp);
+ 
+@@ -60,7 +59,6 @@ private:
+     QSqlDatabase *m_db = nullptr;
+     QString m_uuid;
+     QString m_text;
+-    QStringList m_formats;
+     QString m_dataDir;
+     std::list<MimeData> m_mimeDataList;
+     qreal m_timestamp;
+-- 
+GitLab
+
