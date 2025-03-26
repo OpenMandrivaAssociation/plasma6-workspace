@@ -15,7 +15,7 @@
 
 Name: plasma6-workspace
 Version: 6.3.3
-Release: %{?git:0.%{git}.}5
+Release: %{?git:0.%{git}.}6
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else

@@ -5,7 +5,7 @@ diff -up plasma-workspace-6.3.0/startkde/startplasma-wayland.cpp.2~ plasma-works
  
      // Let clients try to reconnect to kwin after a restart
      qputenv("QT_WAYLAND_RECONNECT", "1");
-+    qputenv("QT_QPA_PLATFORM", "wayland-egl");
++    qputenv("QT_QPA_PLATFORM", "wayland");
  
      // Query whether org.freedesktop.locale1 is available. If it is, try to
      // set XKB_DEFAULT_{MODEL,LAYOUT,VARIANT,OPTIONS} accordingly.
