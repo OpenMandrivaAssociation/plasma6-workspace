@@ -14,8 +14,8 @@
 %define libname %mklibname kworkspace6
 
 Name: plasma6-workspace
-Version: 6.3.3
-Release: %{?git:0.%{git}.}6
+Version: 6.3.4
+Release: %{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-workspace/-/archive/%{gitbranch}/plasma-workspace-%{gitbranchd}.tar.bz2#/plasma-workspace-%{git}.tar.bz2
 %else
@@ -190,8 +190,6 @@ plasma-workspace-wayland-egl-is-wayland.patch
 plasma-workspace-default-OM-wallpaper.patch
 # FIXME this needs to be redone properly (OM theme)
 # plasma-workspace-5.8.0-use-openmandriva-icon-and-background.patch
-https://invent.kde.org/plasma/plasma-workspace/-/commit/bbecc43cef4e7c615fe8b1691c2eb1e1f916edf3.patch
-https://invent.kde.org/plasma/plasma-workspace/-/commit/9c014bad595b743de4ca7b236c4d467356505990.patch
 
 %description
 The KDE Plasma workspace.
